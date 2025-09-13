@@ -1,0 +1,7 @@
+global:
+  scrape_interval: 15s
+scrape_configs:
+  - job_name: "seneca_ingestor"
+    static_configs:
+      - targets: ["host.docker.internal:9108"]  # if Prometheus runs in Docker and app on host
+      # or: ["ingestor:9108"] if both are in the same docker-compose network

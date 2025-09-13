@@ -1,0 +1,14 @@
+pandascore:
+  base_url: "https://api.pandascore.co"
+  game: "lol"
+  # set PANDASCORE_TOKEN in env (never commit)
+  requests_per_hour: 950   # keep headroom under 1000/h
+  poll:
+    schedule_seconds: 60   # how often to refresh upcoming/running matches
+    results_seconds: 90    # how often to refresh finished matches
+  pagesize: 50
+  timezone: "UTC"
+  use_live_websocket: false  # requires paid Live plan; leave false on free tier
+  # optional filters to reduce API volume
+  leagues_whitelist: []      # e.g. ["lck", "lec"]
+  tournaments_whitelist: []  # tournament slugs or ids
