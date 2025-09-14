@@ -1,0 +1,9 @@
+lolesports:
+  gw_base: "https://esports-api.lolesports.com/persisted/gw"
+  feed_base: "https://feed.lolesports.com/livestats/v1"
+  hl: "en-US"
+  # Put your site key in env: LOLESPORTS_API_KEY
+  poll:
+    discover_seconds: 20   # poll getLive
+    window_seconds: 2      # poll /window/{gameId}
+    details_seconds: 5     # poll /details/{gameId}

@@ -44,7 +44,7 @@ class LolScheduleStream:
 
             for m in matches:
                 mid = m.get("id")
-                if mid in seen_ids:
+                if mid is None or mid in seen_ids:
                     continue  # avoid double-publish if it appears in both lists this tick
                 seen_ids.add(mid)
 

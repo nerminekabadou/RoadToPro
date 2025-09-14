@@ -16,7 +16,7 @@ log = logging.getLogger(__name__)
 
 class Settings(BaseSettings):
     PANDASCORE_TOKEN: str
-    # LOLESPORTS_API_KEY: str
+    LOLESPORTS_API_KEY: str
     # RIOT_API_KEY: str
 
     class Config:

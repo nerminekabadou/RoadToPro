@@ -2,5 +2,57 @@ services:
   prometheus:
     image: prom/prometheus:latest
     volumes:
-      - ./docker/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
     ports: ["9090:9090"]
+  postgres:
+    image: postgres:16-alpine
+    container_name: seneca_pg
+    environment:
+      POSTGRES_USER: seneca
+      POSTGRES_PASSWORD: seneca
+      POSTGRES_DB: seneca
+    ports: 
+      - 55432:5432
+    command: postgres -c password_encryption=md5
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U seneca -d seneca"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+ 
+
+  adminer:
+    image: adminer
+    ports: ["8080:8080"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+  redpanda:
+    image: redpandadata/redpanda:v24.1.8
+    command:
+      - redpanda start
+      - --smp=1
+      - --memory=1G
+      - --overprovisioned
+      # Two listeners:
+      - --kafka-addr=INTERNAL://0.0.0.0:9092,EXTERNAL://0.0.0.0:19092
+      # Advertise container name for INTERNAL, localhost for EXTERNAL:
+      - --advertise-kafka-addr=INTERNAL://redpanda:9092,EXTERNAL://localhost:19092
+    ports:
+      - "9092:9092"    # internal (containers use redpanda:9092)
+      - "19092:19092"  # external (host uses localhost:19092)
+  console:
+    image: redpandadata/console:latest
+    environment:
+      - KAFKA_BROKERS=redpanda:9092
+    ports:
+      - "8081:8080"   # Web UI
+    depends_on:
+      redpanda:
+        condition: service_healthy
+
+
+volumes:
+  pg_data:

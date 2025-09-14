@@ -1,0 +1,16 @@
+agent:
+  game: "lol"
+  live_topic: "esports.lol.live.window"
+  highlights_topic: "esports.lol.highlights"
+  # Heuristic knobs (seconds, numbers)
+  multikill_window_s: 15
+  comeback_window_s: 120
+  comeback_swing_gold: 3000
+  cooldowns_s:
+    baron: 20
+    dragon: 15
+    tower: 8
+    inhibitor: 20
+    ace: 20
+    first_blood: 9999
+    multikill: 8
