@@ -6,8 +6,8 @@ export default function UpcomingMatches({ matches }) {
   }
 
   return (
-    <div className="bg-gray-800 p-4 rounded space-y-4">
-      <h3 className="text-lg font-semibold mb-2">Upcoming Matches</h3>
+    <div className="bg-gray-900 p-6 rounded-2xl shadow-md w-full">
+      <h3 className="text-xl font-bold mb-4">Upcoming Matches</h3>
       {matches.map((m) => (
         <div key={m.payload.id} className="flex justify-between items-center p-2 bg-gray-900 rounded hover:bg-gray-700 transition">
           <div>
