@@ -97,6 +97,7 @@ __pypackages__/
 # dotenv
 .env
 .env.*
+!.env.example
 
 # virtualenv
 .venv/
@@ -133,3 +134,5 @@ cython_debug/
 # Data, models, and other custom folders
 data/
 models/
+# editor settings
+.vscode/
